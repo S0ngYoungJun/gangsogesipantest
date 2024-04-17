@@ -1,0 +1,48 @@
+.container {
+  padding: 20px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table td, .table th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+.input {
+  width: 95%; /* 셀 내부에 잘 맞도록 조정 */
+  padding: 5px; /* 입력 필드의 패딩 조정 */
+  border: 1px solid #cccccc; /* 입력 필드의 테두리 스타일 */
+}
+
+.secondTable {
+  width: 100%;
+  border-collapse: collapse;
+  border: 2px solid black; /* 더 진한 테두리를 위해 */
+
+  .input{
+    width:3vw;  
+  }
+}
+
+.secondTable td, .secondTable th {
+  border: 2px solid black; /* 셀의 테두리도 진하게 */
+  height:5vh;
+  
+  
+  
+  
+}
+
+.secondTable td:nth-child(1), .secondTable th:nth-child(1) {
+  width: 11vw; /* 2열의 너비를 10vw로 설정 */
+  text-align: center;
+}
+
+.narrowInputstyles{
+  width:10vw;
+}
