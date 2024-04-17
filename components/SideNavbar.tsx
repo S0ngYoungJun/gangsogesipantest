@@ -44,13 +44,13 @@ export default function SideNavbar({}: Props) {
         isCollapsed={mobileWidth ? true : isCollapsed}
         links={[
           {
-            title: "Dashboard",
+            title: "메인화면",
             href: "/",
             icon: LayoutDashboard,
             variant: "default"
           },
           {
-            title: "Users",
+            title: "담당자 관리",
             href: "/users",
             icon: UsersRound,
             variant: "ghost"

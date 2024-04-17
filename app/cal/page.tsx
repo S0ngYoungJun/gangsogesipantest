@@ -391,7 +391,8 @@ useEffect(() => {
 }, [seniorAuditorsRow3, seniorAuditorsRow6, auditorsRow4, auditorsRow7, additionalFactors, regionPrices, selectedRegion]); // 의존성 배열에 관련된 모든 상태 포함
 
 const downloadPdfDocument = () => {
-  const input = document.body; // 전체 body 또는 특정 요소를 선택
+  const input = document.getElementById('content-to-print'); // 특정 요소 선택
+  if (!input) return;
   html2canvas(input, { scale: 2 }).then((canvas) => {
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF({
@@ -416,7 +417,7 @@ const downloadPdfDocument = () => {
 }
 
   return (
-        <div className={styles.container} ref={pdfRef} >
+        <div className={styles.container} ref={pdfRef} id="content-to-print" >
             <Head>
                 <title>Document Table</title>
             </Head>

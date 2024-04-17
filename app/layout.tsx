@@ -6,6 +6,7 @@ import "./globals.css";
 import { cn } from "../lib/utils";
 import SideNavbar from "@/components/SideNavbar";
 import Topbar from "@/components/Topbar";
+import styles from "./index.module.scss"
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -35,7 +36,11 @@ export default function RootLayout({
         {/* main page */}
         
         <div className=" w-full">
-        <Topbar/>{children}</div>
+        <Topbar/>
+        <div className={styles.main}>
+        {children}
+        </div>
+        </div>
       </body>
     </html>
   );
