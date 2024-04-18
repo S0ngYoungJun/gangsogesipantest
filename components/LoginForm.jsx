@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import styles from '@/styles/LoginForm.module.scss'; 
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
@@ -34,35 +35,43 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="grid h-screen place-items-center">
-      <div className="p-5 border-t-4 border-green-400 rounded-lg shadow-lg">
-        <h1 className="my-4 text-xl font-bold">Login</h1>
+    <div className={styles.container}>
+      <div className={styles.section1}>
+        <div className={styles.title}>강소 관리자 사이트</div>
+        <div className={styles.formContainer}>
+          <h1 className={styles.logintitle}>Login</h1>
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-          <input
-            onChange={(e) => setEmail(e.target.value)}
-            type="text"
-            placeholder="Email"
-          />
-          <input
-            onChange={(e) => setPassword(e.target.value)}
-            type="password"
-            placeholder="Password"
-          />
-          <button className="px-6 py-2 font-bold text-white bg-green-600 cursor-pointer">
-            Login
-          </button>
-          {error && (
-            <div className="px-3 py-1 mt-2 text-sm text-white bg-red-500 rounded-md w-fit">
-              {error}
-            </div>
-          )}
+          <form onSubmit={handleSubmit} className={styles.form}>
+            <input
+              onChange={(e) => setEmail(e.target.value)}
+              type="text"
+              placeholder="Email"
+              className={styles.input}
+            />
+            <input
+              onChange={(e) => setPassword(e.target.value)}
+              type="password"
+              placeholder="Password"
+              className={styles.input}
+            />
+            <button className={styles.button}>
+              Login
+            </button>
+            {error && (
+              <div className={styles.error}>
+                {error}
+              </div>
+            )}
 
-          <Link className="mt-3 text-sm text-right" href={"/register"}>
-            Don`t have an account? <span className="underline">Register</span>
-          </Link>
-        </form>
+            <Link href={"/register"} className={styles.registerLink}>
+              Don`t have an account? <span className={styles.underline}>Register</span>
+            </Link>
+          </form>
+        </div>
       </div>
+    <div className={styles.section2}>
+
     </div>
-  );
+  </div>
+);
 }
