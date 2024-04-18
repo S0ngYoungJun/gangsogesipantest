@@ -107,7 +107,7 @@ const data: Payment[] = [
   {
     NO: "5",
     아이디: "bob@example.com",
-    영업담당자명: "최승희",
+    영업담당자명: "황수경",
     영업담당자연락처: "010-0000-0003",
     영업담당자이메일: "bob@example.com",
     회원사수: 250,
@@ -117,7 +117,7 @@ const data: Payment[] = [
 
 export default function UsersPage({}: Props) {
   return (
-    <div className="flex flex-col gap-5  w-full">
+    <div className="flex flex-col w-full gap-5">
       <PageTitle title="담당자" />
       <DataTable columns={columns} data={data} />
     </div>
