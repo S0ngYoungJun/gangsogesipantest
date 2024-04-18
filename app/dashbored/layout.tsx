@@ -2,8 +2,7 @@
 
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
-import { cn } from "../lib/utils";
+import { cn } from "../../lib/utils";
 import SideNavbar from "@/components/SideNavbar";
 import Topbar from "@/components/Topbar";
 import styles from "./index.module.scss"
@@ -35,7 +34,7 @@ export default function RootLayout({
         <SideNavbar />
         {/* main page */}
         
-        <div className=" w-full">
+        <div className="w-full ">
         <Topbar/>
         <div className={styles.main}>
         {children}

@@ -46,19 +46,19 @@ export default function SideNavbar({}: Props) {
         links={[
           {
             title: "메인화면",
-            href: "/",
+            href: "/dashbored",
             icon: LayoutDashboard,
             variant: "default"
           },
           {
             title: "관리자 관리",
-            href: "/member",
+            href: "/dashbored/member",
             icon: UserRoundCheck,
             variant: "ghost"
           },
           {
             title: "담당자 관리",
-            href: "/users",
+            href: "/dashbored/users",
             icon: UsersRound,
             variant: "ghost"
           },
@@ -76,7 +76,7 @@ export default function SideNavbar({}: Props) {
           // }
           {
             title: "견적 계산기",
-            href: "/cal",
+            href: "/dashbored/cal",
             icon: Settings,
             variant: "ghost"
           }
