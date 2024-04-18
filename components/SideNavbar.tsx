@@ -11,7 +11,8 @@ import {
   LayoutDashboard,
   UsersRound,
   Settings,
-  ChevronRight
+  ChevronRight,
+  UserRoundCheck,
 } from "lucide-react";
 import { Button } from "./ui/button";
 
@@ -34,7 +35,7 @@ export default function SideNavbar({}: Props) {
           <Button
             onClick={toggleSidebar}
             variant="secondary"
-            className=" rounded-full p-2"
+            className="p-2 rounded-full "
           >
             <ChevronRight />
           </Button>
@@ -48,6 +49,12 @@ export default function SideNavbar({}: Props) {
             href: "/",
             icon: LayoutDashboard,
             variant: "default"
+          },
+          {
+            title: "관리자 관리",
+            href: "/member",
+            icon: UserRoundCheck,
+            variant: "ghost"
           },
           {
             title: "담당자 관리",
