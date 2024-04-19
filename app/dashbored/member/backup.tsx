@@ -64,30 +64,41 @@ const columns: ColumnDef<Admin>[] = [
 ];
 type DataType = any[]; // 더 구체적인 타입으로 교체할 수 있습니다.
 
-const [data, setData] = useState([]);
+const [data, setData] = useState<DataType>([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      await connectMongoDB(); // MongoDB에 연결
-      try {
-        const results = await memberModel.find({});
-        setData(results);
-      } catch (error) {
-        console.error('Error fetching data: ', error);
-      }
-    };
+useEffect(() => {
+  const fetchData = async () => {
+    const { data, error } = await supabase
+      .from('admin') // 'admin'이 실제 테이블 이름인지 확인하세요.
+      .select('*');
 
-    fetchData();
-  }, []);
-
-  const handleDelete = async (id : any) => {
-    try {
-      await memberModel.findByIdAndDelete(id);
-      setData(data.filter(item => item._id !== id));
-    } catch (error) {
-      console.error('Error deleting data: ', error);
+    if (error) {
+      console.error('Error fetching data: ', error);
+    } else {
+      setData(data);
+      console.log(data); // 여기로 로그를 옮깁니다.
     }
   };
+
+  fetchData();
+}, []);
+
+//삭제버튼
+const handleDelete = async (row : any) => {
+  const NO = row.getValue("NO");
+
+  const { error } = await supabase
+    .from('admin')
+    .delete()
+    .match({ NO: NO });
+
+  if (error) {
+    console.error('Error deleting data: ', error);
+  } else {
+    // 로컬 state 업데이트로 UI를 즉시 반영
+    setData(data.filter(item => item.NO !== NO));
+  }
+};
 
   return (
     <div className="flex flex-col w-full gap-5">

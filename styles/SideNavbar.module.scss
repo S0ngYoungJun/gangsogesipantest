@@ -1,0 +1,17 @@
+.sidebar {
+  position: relative;
+  border-right: 1px solid #ddd; // Adjust as needed
+  padding: 24px 12px 40px;
+  background-color: #DCD6F7;
+}
+
+.toggleButton {
+  position: absolute;
+  right: 0.5vw;
+  top: 28px;
+}
+
+.button {
+  padding: 8px;
+  border-radius: 50%;
+}

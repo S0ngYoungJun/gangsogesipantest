@@ -6,7 +6,12 @@ import { cn } from "../../lib/utils";
 import SideNavbar from "@/components/SideNavbar";
 import Topbar from "@/components/Topbar";
 import styles from "./index.module.scss"
-const inter = Inter({ subsets: ["latin"] });
+import localFont from 'next/font/local'
+
+const myFont = localFont({
+  src: '../../public/fonts/AppleSDGothicNeoSB.ttf',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -23,7 +28,7 @@ export default function RootLayout({
       <body
         className={cn(
           "min-h-screen w-full bg-white text-black flex ",
-          inter.className,
+          myFont.className,
           {
             "debug-screens": process.env.NODE_ENV === "development"
           }

@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/tooltip";
 import { TooltipProvider } from "@radix-ui/react-tooltip";
 import { usePathname } from "next/navigation";
-
+import styles from '@/styles/Nav.module.scss';
 interface NavProps {
   isCollapsed: boolean;
   links: {
@@ -28,13 +28,17 @@ interface NavProps {
 
 export function Nav({ links, isCollapsed }: NavProps) {
   const pathName = usePathname();
+  links.forEach(link => {
+    console.log(`Current path: ${pathName}, Link path: ${link.href}`);
+  });
+
   return (
     <TooltipProvider>
       <div
         data-collapsed={isCollapsed}
-        className="group flex flex-col gap-4 py-2 data-[collapsed=true]:py-2"
+        className={cn(styles.container, { [styles.collapsed]: isCollapsed })}
       >
-        <nav className="grid gap-1 px-2 group-[[data-collapsed=true]]:justify-center group-[[data-collapsed=true]]:px-2">
+        <nav className={cn(styles.nav, { [styles.navCollapsed]: isCollapsed })}>
           {links.map((link, index) =>
             isCollapsed ? (
               <Tooltip key={index} delayDuration={0}>
@@ -46,22 +50,22 @@ export function Nav({ links, isCollapsed }: NavProps) {
                         variant: link.href === pathName ? "default" : "ghost",
                         size: "icon"
                       }),
-                      "h-9 w-9",
-                      link.variant === "default" &&
-                        "dark:bg-muted dark:text-muted-foreground dark:hover:bg-muted dark:hover:text-white"
+                      styles.iconButton,
+                      link.variant === "default" && styles.defaultVariant,
+                      link.href === pathName && styles.activeButton
                     )}
                   >
-                    <link.icon className="h-4 w-4" />
+                    <link.icon className={styles.icon} />
                     <span className="sr-only">{link.title}</span>
                   </Link>
                 </TooltipTrigger>
                 <TooltipContent
                   side="right"
-                  className="flex items-center gap-4"
+                  className={styles.tooltipContent}
                 >
                   {link.title}
                   {link.label && (
-                    <span className="ml-auto text-muted-foreground">
+                    <span className={styles.label}>
                       {link.label}
                     </span>
                   )}
@@ -76,21 +80,15 @@ export function Nav({ links, isCollapsed }: NavProps) {
                     variant: link.href === pathName ? "default" : "ghost",
                     size: "sm"
                   }),
-                  link.variant === "default" &&
-                    "dark:bg-muted dark:text-white dark:hover:bg-muted dark:hover:text-white",
-                  "justify-start"
+                  styles.textButton,
+                  link.variant === "default" && styles.defaultTextButton,
+                  link.href === pathName && styles.activeButton
                 )}
               >
-                <link.icon className="mr-2 h-4 w-4" />
+                <link.icon className={styles.iconWithText} />
                 {link.title}
                 {link.label && (
-                  <span
-                    className={cn(
-                      "ml-auto",
-                      link.variant === "default" &&
-                        "text-background dark:text-white"
-                    )}
-                  >
+                  <span className={styles.labelWithText}>
                     {link.label}
                   </span>
                 )}

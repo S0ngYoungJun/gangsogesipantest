@@ -1,0 +1,84 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 8px 0;
+ margin-top:5vh;
+}
+
+.collapsed {
+  padding: 8px 0;
+}
+
+.nav {
+  display: grid;
+  gap: 4px;
+  padding: 10px 8px;
+
+  span{
+    margin-left:5vw;
+  }
+  
+}
+
+.navCollapsed {
+  justify-content: center;
+  padding: 4px 8px;
+}
+
+// .iconButton,
+// .textButton {
+//   display: flex;
+//   align-items: center;
+//   height: 36px;
+//   width: 36px;
+// }
+
+.defaultVariant {
+  background-color: #aaa; // Example muted color
+  color: #fff;
+
+  &:hover {
+    background-color: #bbb;
+    color: #fff;
+  }
+}
+
+.defaultTextButton {
+  background-color: white;
+  color: black;
+  &:hover {
+    background-color: #bbb;
+    color: #fff;
+  }
+}
+
+.icon {
+  height: 16px;
+  width: 16px;
+}
+
+.iconWithText {
+  margin-right: 8px;
+  height: 16px;
+  width: 16px;
+}
+
+.tooltipContent {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.label,
+.labelWithText {
+  margin-left: auto;
+  color: #ccc; // Example for muted foreground
+}
+
+.activeButton {
+  background-color: #333; // 현재 페이지 버튼의 배경색
+  color: #fff; // 현재 페이지 버튼의 텍스트 색
+
+  
+}

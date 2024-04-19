@@ -1,0 +1,101 @@
+$popover-color: #f0f0f0; // 배경 색상
+$popover-foreground-color: #333; // 글자 색상
+
+.tooltipContent {
+  z-index: 50;
+  overflow: hidden;
+  border-radius: 0.375rem; // 대략 6px
+  background-color: $popover-color; // 변수로 색상 관리
+  padding: 0.375rem 0.75rem; // 대략 6px 12px
+  font-size: 0.875rem; // 대략 14px
+  color: $popover-foreground-color; // 변수로 색상 관리
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.05); // 예시 그림자
+  animation: fade-in 0.15s ease-out, zoom-in 0.15s ease-out;
+  &[data-state='closed'] {
+    animation: fade-out 0.15s ease-out, zoom-out 0.15s ease-out;
+  }
+  &[data-side='bottom'] {
+    animation: slide-in-from-top 0.2s ease-out;
+  }
+  &[data-side='left'] {
+    animation: slide-in-from-right 0.2s ease-out;
+  }
+  &[data-side='right'] {
+    animation: slide-in-from-left 0.2s ease-out;
+  }
+  &[data-side='top'] {
+    animation: slide-in-from-bottom 0.2s ease-out;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes zoom-in {
+  from {
+    transform: scale(0.95);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes zoom-out {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0.95);
+  }
+}
+
+@keyframes slide-in-from-top {
+  from {
+    transform: translateY(-10px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-from-right {
+  from {
+    transform: translateX(10px);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-from-left {
+  from {
+    transform: translateX(-10px);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-from-bottom {
+  from {
+    transform: translateY(10px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}

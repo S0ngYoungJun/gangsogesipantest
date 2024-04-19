@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  height: 10vh; // full viewport height
+  place-items: center;
+}
+
+.userCard {
+  
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 32px;
+  margin: 24px;
+  background-color: rgba(255, 255, 255, 0.1); // light transparent background
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  color:white;
+}
+
+.userName {
+  font-weight: bold;
+}
+
+.logoutButton {
+  padding: 6px 12px;
+  color: #424874;
+  background-color: #F4EEFF;
+  font-weight: bold;
+}
