@@ -12,19 +12,22 @@ import { ColumnDef } from "@tanstack/react-table";
 import PageTitle from "@/components/PageTitle";
 
 import React, { useEffect, useState } from 'react';
-import { supabase } from '@/utils/supabaseClient';
 import { connectMongoDB } from '@/lib/mongodb'; 
-import memberModel from '@/models/member'
+import Member from '@/models/member'
 
 export default function UsersPage() {
   type Props = {};
   type Admin = {
+    _id: string; // MongoDB의 고유 ID 사용
     NO:string;
     관리자아이디: string;
     관리자명: string;
     관리서비스: string;
-    등록일:Date;
+    등록일: Date;
+    비밀번호: string;
+    관리자권한: number;
   };
+  
 const columns: ColumnDef<Admin>[] = [
   {
     accessorKey: "NO",
@@ -64,30 +67,28 @@ const columns: ColumnDef<Admin>[] = [
 ];
 type DataType = any[]; // 더 구체적인 타입으로 교체할 수 있습니다.
 
-const [data, setData] = useState([]);
+const [data, setData] = useState<Admin[]>([]); 
 
-  useEffect(() => {
-    const fetchData = async () => {
-      await connectMongoDB(); // MongoDB에 연결
-      try {
-        const results = await memberModel.find({});
-        setData(results);
-      } catch (error) {
-        console.error('Error fetching data: ', error);
-      }
-    };
+useEffect(() => {
+  async function fetchData() {
+    const res = await fetch('/api/dashbored/member');
+    const data = await res.json();
+    setData(data);
+    console.log(data)
+    console.log(setData)
+  }
+  fetchData();
+}, []);
 
-    fetchData();
-  }, []);
-
-  const handleDelete = async (id : any) => {
-    try {
-      await memberModel.findByIdAndDelete(id);
-      setData(data.filter(item => item._id !== id));
-    } catch (error) {
-      console.error('Error deleting data: ', error);
-    }
-  };
+  // const handleDelete = async (row: any) => {
+  //   try {
+  //     const id = row.getValue("_id");
+  //     await Member.findByIdAndDelete(id);
+  //     setData(data.filter(item => item._id !== id));
+  //   } catch (error) {
+  //     console.error('Error deleting data: ', error);
+  //   }
+  // };
 
   return (
     <div className="flex flex-col w-full gap-5">

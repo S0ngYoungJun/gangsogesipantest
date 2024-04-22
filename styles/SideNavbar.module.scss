@@ -3,6 +3,7 @@
   border-right: 1px solid #ddd; // Adjust as needed
   padding: 24px 12px 40px;
   background-color: #DCD6F7;
+  transition: width 0.3s ease-out;
 }
 
 .toggleButton {
@@ -14,4 +15,15 @@
 .button {
   padding: 8px;
   border-radius: 50%;
+}
+
+
+.dropdownMenu {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.5s ease-out;
+}
+
+.dropdownOpen {
+  max-height: 10em; /* 예상되는 최대 높이, 메뉴 항목 수에 따라 조정해야 할 수 있음 */
 }

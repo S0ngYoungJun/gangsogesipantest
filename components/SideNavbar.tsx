@@ -12,6 +12,7 @@ import {
   UsersRound,
   Settings,
   ChevronRight,
+  ChevronDown,
   UserRoundCheck,
 } from "lucide-react";
 import { Button } from "./ui/button";
@@ -20,16 +21,21 @@ import { useWindowWidth } from "@react-hook/window-size";
 
 export default function SideNavbar({}: Props) {
   const [isCollapsed, setIsCollapsed] = useState(false);
-
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [sidebarWidth, setSidebarWidth] = useState(200); 
   const onlyWidth = useWindowWidth();
   const mobileWidth = onlyWidth < 768;
 
   function toggleSidebar() {
     setIsCollapsed(!isCollapsed);
+    setSidebarWidth(isCollapsed ? 180 : 70);
+  }
+  function toggleDropdown() {
+    setDropdownOpen(!dropdownOpen);
   }
 
   return (
-    <div className={styles.sidebar}>
+    <div className={styles.sidebar}  style={{ width: `${sidebarWidth}px` }}>
       {!mobileWidth && (
         <div className={styles.toggleButton}>
           <Button
@@ -82,6 +88,17 @@ export default function SideNavbar({}: Props) {
           }
         ]}
       />
+      <div>
+        <Button onClick={toggleDropdown} variant="ghost">
+          관리자 옵션 {dropdownOpen ? '▼' : '▶'}
+        </Button>
+        <div className={`${styles.dropdownMenu} ${dropdownOpen ? styles.dropdownOpen : ''}`}>
+          <ul className={styles.dropdownList}>
+            <li><a href="/dashbored/member">관리자 관리</a></li>
+            <li><a href="/dashbored/advanced">고급 설정</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
   );
 }

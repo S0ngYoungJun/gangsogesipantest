@@ -28,10 +28,7 @@ interface NavProps {
 
 export function Nav({ links, isCollapsed }: NavProps) {
   const pathName = usePathname();
-  links.forEach(link => {
-    console.log(`Current path: ${pathName}, Link path: ${link.href}`);
-  });
-
+ 
   return (
     <TooltipProvider>
       <div

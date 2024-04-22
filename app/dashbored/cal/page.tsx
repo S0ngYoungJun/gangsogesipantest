@@ -25,6 +25,11 @@ export default function TablePage() {
     ["2단계 심사 총 출장비", "선임 심사원", "단일 항목 2-2", "심사원", "", "0"], // 8행: 동일한 3,4,5,6,7행 설정
     ["합 계", "합친 항목 2-3", "", "합친 항목 4-5", "", ""]  // 9행: 1행 설정과 동일
 ];
+const [thridTableData, setThirdTableData] = useState([
+  ['부가세 10%', '신청비', '심사비', '출장비', ''],
+  ['할인', '한국ISO지원센터 특별 할인', '', '', ''],
+  ['총합계금액', '', '', '', '']
+]);
   const [selectedType, setSelectedType] = useState(newDropdownOptions[1]);
     // 1열의 내용을 미리 설정
     const rowData = [
@@ -59,7 +64,16 @@ export default function TablePage() {
     //심사원
     const [auditorsRow4, setAuditorsRow4] = useState(0);
     const [auditorsRow7, setAuditorsRow7] = useState(0);
-    
+    const [incrementPerAuditor300, setIncrementPerAuditor300] = useState(300000);
+    const [incrementPerAuditor200, setIncrementPerAuditor200] = useState(200000);
+  
+    const handleIncrementChange300 = (event : any) => {
+      setIncrementPerAuditor300(event.target.value);
+    };
+  
+    const handleIncrementChange200 = (event : any) => {
+      setIncrementPerAuditor200(event.target.value);
+    };
 
     
     const priceMapping = {
@@ -72,7 +86,17 @@ export default function TablePage() {
       "ISO 9001:2015 & 14001:2015 & 45001:2018": { "최초": 700000, "사후": 500000, "갱신": 550000 }
   };
 
-  
+  const [discount, setDiscount] = useState(0);
+
+  const handleDiscountChange = (e) => {
+    const value = e.target.value;
+    // 입력값이 비었거나 0으로 시작할 경우 초기화
+    if (value === '' || value === '0') {
+      e.target.value = value.replace(/^0+/, '');
+    }
+    setDiscount(parseInt(value, 10) || "");
+  };
+
 const [secondTableData, setSecondTableData] = useState(initialData);
 
 const calculatePrice = (standard, type) => {
@@ -160,17 +184,16 @@ useEffect(() => {
         const rowKey = rowIndex === 2 ? 'row3' : 'row6';
         const auditors = rowIndex === 2 ? seniorAuditorsRow3 : seniorAuditorsRow6;
         const additionalFactor = rowIndex === 2 ? additionalFactors.row3 : additionalFactors.row6;
-        const incrementPerAuditor = 300000;
-        const totalAmount = auditors * incrementPerAuditor * additionalFactor;
+        const totalAmount = auditors * incrementPerAuditor300 * additionalFactor;
 
         const newRow = [...row];
-        newRow[2] = `${auditors}명 x ${incrementPerAuditor.toLocaleString()} = ${totalAmount.toLocaleString()}`;
+        newRow[2] = `${auditors}명 x ${incrementPerAuditor300.toLocaleString()} = ${totalAmount.toLocaleString()}`;
         return newRow;
       }
       return row;
     });
   });
-}, [seniorAuditorsRow3, seniorAuditorsRow6, additionalFactors.row3, additionalFactors.row6]); 
+}, [seniorAuditorsRow3, seniorAuditorsRow6, additionalFactors.row3, additionalFactors.row6, incrementPerAuditor300]); 
 
 const handleCellInputChange = (rowIndex: number, cellIndex: number, value: string) => {
   setSecondTableData(prevData => {
@@ -185,7 +208,7 @@ const handleCellInputChange = (rowIndex: number, cellIndex: number, value: strin
   });
 };
 
-const handleSeniorAuditorChange = (rowIndex, value) => {
+const handleSeniorAuditorChange = (rowIndex : any, value : any)  => {
   const newValue = parseInt(value, 10) || 0;
   if (rowIndex === 2) {
     setSeniorAuditorsRow3(newValue);
@@ -195,7 +218,7 @@ const handleSeniorAuditorChange = (rowIndex, value) => {
 };
 
 
-const handleAdditionalFactorChange = (rowKey, value) => {
+const handleAdditionalFactorChange = (rowKey : any , value : any) => {
   const newValue = parseFloat(value);
   if (rowKey === 'row3') {
     setAdditionalFactors(prev => ({ ...prev, row3: newValue }));
@@ -212,7 +235,7 @@ const handleAdditionalFactorChange = (rowKey, value) => {
 
 
 // 핸들러 함수 추가
-const handleAuditorChange = (rowIndex, value) => {
+const handleAuditorChange = (rowIndex : any , value : any) => {
   const newValue = parseInt(value, 10) || 0;  // 입력 값이 없거나 유효하지 않은 경우 0으로 처리
   if (rowIndex === 3) {
     setAuditorsRow4(newValue);
@@ -229,17 +252,16 @@ useEffect(() => {
         const rowKey = rowIndex === 3 ? 'row4' : 'row7';
         const auditors = rowIndex === 3 ? auditorsRow4 : auditorsRow7;
         const additionalFactor = rowIndex === 3 ? additionalFactors.row4 : additionalFactors.row7;
-        const incrementPerAuditor = 200000;
-        const totalAmount = auditors * incrementPerAuditor * additionalFactor;
+        const totalAmount = auditors * incrementPerAuditor200 * additionalFactor;
 
         const newRow = [...row];
-        newRow[3] = `${auditors}명 x ${incrementPerAuditor.toLocaleString()} = ${totalAmount.toLocaleString()}`;
+        newRow[3] = `${auditors}명 x ${incrementPerAuditor200.toLocaleString()} = ${totalAmount.toLocaleString()}`;
         return newRow;
       }
       return row;
     });
   });
-}, [auditorsRow4, auditorsRow7, additionalFactors.row4 , additionalFactors.row7]);
+}, [auditorsRow4, auditorsRow7, additionalFactors.row4 , additionalFactors.row7, incrementPerAuditor200]);
 
 useEffect(() => {
   setSecondTableData(prevData => {
@@ -248,14 +270,14 @@ useEffect(() => {
 
     const newData = prevData.map((row, rowIndex) => {
       if (rowIndex === 2 || rowIndex === 3) {
-        const incrementPerAuditor = rowIndex === 2 ? 300000 : 200000;
+        const incrementPerAuditor = rowIndex === 2 ? incrementPerAuditor300 : incrementPerAuditor200;
         const auditors = rowIndex === 2 ? seniorAuditorsRow3 : auditorsRow4;
         const additionalFactor = rowIndex === 2 ? additionalFactors.row3 : additionalFactors.row4;
         const totalAmount = auditors * incrementPerAuditor * additionalFactor;
         combinedAmountRow34 += totalAmount; // 합산
         return row;
       } else if (rowIndex === 5 || rowIndex === 6) {
-        const incrementPerAuditor = rowIndex === 5 ? 300000 : 200000;
+        const incrementPerAuditor = rowIndex === 5 ? incrementPerAuditor300 : incrementPerAuditor200;
         const auditors = rowIndex === 5 ? seniorAuditorsRow6 : auditorsRow7;
         const additionalFactor = rowIndex === 5 ? additionalFactors.row6 : additionalFactors.row7;
         const totalAmount = auditors * incrementPerAuditor * additionalFactor;
@@ -271,7 +293,7 @@ useEffect(() => {
 
     return newData;
   });
-}, [seniorAuditorsRow3, auditorsRow4, seniorAuditorsRow6, auditorsRow7, additionalFactors]);
+}, [seniorAuditorsRow3, auditorsRow4, seniorAuditorsRow6, auditorsRow7, additionalFactors, incrementPerAuditor300, incrementPerAuditor200]);
 
 
 
@@ -390,6 +412,46 @@ useEffect(() => {
   });
 }, [seniorAuditorsRow3, seniorAuditorsRow6, auditorsRow4, auditorsRow7, additionalFactors, regionPrices, selectedRegion]); // 의존성 배열에 관련된 모든 상태 포함
 
+useEffect(() => {
+  setSecondTableData(prevData => {
+    const newData = [...prevData];
+    // 3, 4, 6, 7행의 4열과 5열 값들의 총합 계산
+    const sum = [2, 3, 5, 6] // 해당 행 인덱스
+      .reduce((acc, rowIndex) => {
+        const row = newData[rowIndex];
+        // 4열과 5열의 값을 숫자로 변환하여 더하기
+        const sumForRow = [5] // 해당 열 인덱스
+          .reduce((sum, colIndex) => sum + parseInt(row[colIndex].replace(/[^0-9]/g, ''), 10) || 0, 0);
+        return acc + sumForRow;
+      }, 0);
+
+    // 7행의 2열 업데이트
+    newData[8][1] = sum.toLocaleString(); // 총합을 문자열로 변환하여 저장
+    return newData;
+  });
+}, [secondTableData]); // secondTableData에 의존하여 변화 감지
+
+useEffect(() => {
+  setSecondTableData(prevData => {
+    const newData = [...prevData];
+    // 5행과 8행의 3열, 4열 값들의 총합 계산
+    const rowsToSum = [4, 7]; // 5행과 8행의 인덱스
+    const columnsToSum = [2, 4]; // 3열과 4열의 인덱스
+    const totalSum = rowsToSum.reduce((total, rowIndex) => {
+      const rowSum = columnsToSum.reduce((sum, colIndex) => {
+        // 숫자만 추출하여 더하기
+        return sum + (parseInt(newData[rowIndex][colIndex].replace(/[^0-9]/g, ''), 10) || 0);
+      }, 0);
+      return total + rowSum;
+    }, 0);
+
+    // 9행 4열에 합산 값 저장
+    newData[8][3] = totalSum.toLocaleString();
+    return newData;
+  });
+}, [secondTableData]); // secondTableData 변경 시 업데이트
+
+
 const downloadPdfDocument = () => {
   const input = document.getElementById('content-to-print'); // 특정 요소 선택
   if (!input) return;
@@ -415,6 +477,76 @@ const downloadPdfDocument = () => {
       pdf.save("download.pdf");
   });
 }
+
+//3번째표 
+
+useEffect(() => {
+  const newPrice = calculatePrice(selectedStandard, selectedType) / 10;
+  setThirdTableData(currentData => {
+    const newData = [...currentData];
+    newData[0][1] = newPrice.toLocaleString(); // 1행 2열에 새 가격으로 업데이트
+    return newData;
+  });
+}, [selectedStandard, selectedType]);
+
+useEffect(() => {
+  const sumRowsIndices = [2, 3, 5, 6]; // 3, 4, 6, 7행 인덱스
+  const sumColumnsIndices = [5]; // 4열과 5열 인덱스
+
+  // 2번째 표 데이터로부터 값을 계산
+  const totalSum = sumRowsIndices.reduce((total, rowIndex) => {
+    const rowSum = sumColumnsIndices.reduce((sum, colIndex) => {
+      // 숫자만 추출하여 더하기
+      return sum + (parseInt(secondTableData[rowIndex][colIndex].replace(/[^0-9]/g, ''), 10) || 0);
+    }, 0);
+    return total + rowSum;
+  }, 0);
+
+  // 3번째 표의 1행 4열에 계산된 값을 설정
+  setThirdTableData(currentData => {
+    const newData = [...currentData];
+    const lastsum = totalSum / 10;
+    newData[0][2] = lastsum.toLocaleString(); // 1행 4열에 값 설정
+    return newData;
+  });
+}, [secondTableData]); // secondTableData가 변경될 때마다 실행
+
+
+
+useEffect(() => {
+  const rowsToSum = [4, 7]; // 5행과 8행의 인덱스
+  const columnsToSum = [2, 4]; // 3열과 4열의 인덱스
+
+  // 2번째 표 데이터로부터 값을 계산
+  const totalSum = rowsToSum.reduce((total, rowIndex) => {
+    const rowSum = columnsToSum.reduce((sum, colIndex) => {
+      // 2번째 표의 숫자만 추출하여 더하기
+      return sum + (parseInt(secondTableData[rowIndex][colIndex].replace(/[^0-9]/g, ''), 10) || 0);
+    }, 0);
+    return total + rowSum;
+  }, 0);
+
+  // 3번째 표의 1행 3열에 계산된 값을 설정
+  setThirdTableData(currentData => {
+    const newData = [...currentData];
+    const lastsum = totalSum / 10;
+    newData[0][3] = lastsum.toLocaleString(); // 1행 3열에 값 설정
+    return newData;
+  });
+}, [secondTableData]); // secondTableData가 변경될 때마다 실행
+
+useEffect(() => {
+  // 1행의 2, 3, 4열 값을 가져와 숫자로 변환 후 합산
+  const valuesToSum = [1, 2, 3].map(colIndex => parseInt(thridTableData[0][colIndex].replace(/[^0-9]/g, ''), 10) || 0);
+  const totalSum = valuesToSum.reduce((acc, value) => acc + value, 0);
+
+  // 계산된 합을 1행의 5열에 업데이트
+  setThirdTableData(currentData => {
+    const newData = [...currentData];
+    newData[0][4] = totalSum.toLocaleString(); // 5열 (인덱스 4)에 합산된 값 설정
+    return newData;
+  });
+}, [thridTableData[0][1], thridTableData[0][2], thridTableData[0][3]]); // 2, 3, 4열의 값에 의존
 
   return (
         <div className={styles.container} ref={pdfRef} id="content-to-print" >
@@ -559,14 +691,13 @@ const downloadPdfDocument = () => {
                                 const rowKey = rowIndex === 2 ? 'row3' : 'row6';
                                 const auditors = rowIndex === 2 ? seniorAuditorsRow3 : seniorAuditorsRow6;
                                 const additionalFactor = rowIndex === 2 ? additionalFactors.row3 : additionalFactors.row6;
-                                const incrementPerAuditor = 300000;  // 인원당 증가하는 금액
-                                const totalAmount = auditors * incrementPerAuditor * additionalFactor;  // 최종 계산
+                                const totalAmount = auditors * incrementPerAuditor300 * additionalFactor;  // 최종 계산
                             
                                 if (cellIndex === 2) {
                                     // 2열에서는 계산을 위한 입력과 심사원 수를 보여주는 부분
                                     return (
                                         <td key={`input-${rowIndex}-${cellIndex}`}>
-                                            <div>{`${auditors}명 x ${incrementPerAuditor.toLocaleString()}`}</div>
+                                            <div>{`${auditors}명 x ${incrementPerAuditor300.toLocaleString()}`}</div>
                                             <input
                                                 type="number"
                                                 min="0.5"
@@ -574,7 +705,12 @@ const downloadPdfDocument = () => {
                                                 value={additionalFactor}
                                                 onChange={(e) => handleAdditionalFactorChange(rowKey, e.target.value)}
                                                 className={styles.input}
-                                            />
+                                            /><input
+                                            type="number"
+                                            value={incrementPerAuditor300}
+                                            className={styles.input2}
+                                            onChange={handleIncrementChange300}
+                                          />
                                         </td>
                                     );
                                 } else if (cellIndex === 3) {
@@ -590,13 +726,13 @@ const downloadPdfDocument = () => {
                               const rowKey = rowIndex === 3 ? 'row4' : 'row7';
                               const auditors = rowIndex === 3 ? auditorsRow4 : auditorsRow7;
                               const additionalFactor = rowIndex === 3 ? additionalFactors.row4 : additionalFactors.row7;
-                              const incrementPerAuditor = 200000;  // 인원당 증가하는 금액
-                              const totalAmount = auditors * incrementPerAuditor * additionalFactor;  // 최종 계산
+                  
+                              const totalAmount = auditors * incrementPerAuditor200 * additionalFactor;  // 최종 계산
                       
                               if (cellIndex === 2) {
                                   return (
                                       <td key={`input-${rowIndex}-${cellIndex}`}>
-                                          <div>{`${auditors}명 x ${incrementPerAuditor.toLocaleString()}`}</div>
+                                          <div>{`${auditors}명 x ${incrementPerAuditor200.toLocaleString()}`}</div>
                                           <input
                                               type="number"
                                               min="0.5"
@@ -605,6 +741,12 @@ const downloadPdfDocument = () => {
                                               onChange={(e) => handleAdditionalFactorChange(rowKey, e.target.value)}
                                               className={styles.input}
                                           />
+                                           <input
+                                              type="number"
+                                              className={styles.input2}
+                                              value={incrementPerAuditor200}
+                                              onChange={handleIncrementChange200}
+                                            />
                                       </td>
                                   );
                               } else if (cellIndex === 3) {
@@ -654,6 +796,39 @@ const downloadPdfDocument = () => {
                     ))}
                 </tbody>
         </table>
+        <h1>제3의 표</h1>
+      <table className={styles.table3}>
+      <tbody>
+         {thridTableData.map((row, rowIndex) => (
+          <tr key={rowIndex}>
+            {row.map((cell, colIndex) => {
+              // 2행과 3행의 3, 4, 5열을 합치기
+              if ((rowIndex === 1 || rowIndex === 2) && (colIndex === 1)) {
+                return <td key={colIndex} colSpan={3} className="colspan-cell">{cell}</td>;
+              } else if ((rowIndex === 1 || rowIndex === 2) && (colIndex === 2 || colIndex === 3)) {
+                return null; // 합친 셀로 인해 렌더링하지 않음
+              }
+              if (rowIndex === 1 && colIndex === 4) {
+                // 2행 5열에 입력 필드 추가
+                return (
+                  <td key={colIndex}>
+                    <input
+                      type="number"
+                      value={discount}
+                      onChange={handleDiscountChange}
+                      className={styles.input}
+                  
+                    
+                    />
+                  </td>
+                );
+              }
+              return <td key={colIndex}>{cell}</td>; // 기본 셀 렌더링
+            })}
+          </tr>
+        ))}
+      </tbody>
+      </table>
         <button onClick={downloadPdfDocument}>Download PDF</button>
         </div>
     );
