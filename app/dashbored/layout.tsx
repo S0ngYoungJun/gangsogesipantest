@@ -39,7 +39,7 @@ export default function RootLayout({
         <SideNavbar />
         {/* main page */}
         
-        <div className="w-full ">
+        <div className="w-full h-full ">
         <Topbar/>
         <div className={styles.main}>
         {children}

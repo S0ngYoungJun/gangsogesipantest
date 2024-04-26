@@ -1,0 +1,449 @@
+@media screen {
+
+.main{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  table-layout : fixed ;
+  height:100vh;
+}
+.table {
+  width: 90%;
+  height:18vh;
+  border-collapse: collapse;
+  margin-top: 1.5vh;
+  background-color: #D8B4F8;
+  font-weight:700;
+  border-top: 3px solid #49243E;
+  border-bottom: 3px solid #49243E;
+}
+
+.tbody {
+  width:100%;
+  height:18vh;
+}
+
+.table td, .table th {
+  border: 1px solid darkmagenta;
+
+  text-align: center;
+
+  &:nth-child(1) { width: 10%; border-left: 0;} // 첫 번째 열의 너비
+  &:nth-child(2) { width: 10%;} // 두 번째 열의 너비
+  &:nth-child(3) { width: 10%; } // 세 번째 열의 너비
+  &:nth-child(4) { width: 50%; } // 네 번째 열의 너비
+  &:nth-child(5) { width: 20%; border-right: 0; } // 다섯 번째 열의 너비
+
+  input {
+    width: 100%; // 입력 필드 너비를 셀에 꽉 차도록 설정
+    height:100%;
+    padding: 2px; // 입력 필드 내부 패딩
+    box-sizing: border-box; // 박스 모델 지정
+  }
+}
+.white{
+  background-color: white;
+  font-weight:200;
+}
+
+.table2 {
+  width: 90%;
+  border-collapse: collapse;
+  margin-top: 1.5vh;
+  border-top: 3px solid #49243E;
+  border-bottom: 3px solid #49243E;
+  height:9vh;
+  table-layout : fixed ;
+}
+.tbody2 {
+  width:100%;
+  height:9vh;
+}
+.table2 td, .table2 th {
+  border: 1px solid darkmagenta;
+  
+  text-align: center;
+  height:2vh;
+  &:nth-child(1) { width: 6.6vw; background-color: #D8B4F8; font-weight:700; border-left: 0; } // 첫 번째 열의 너비
+  &:nth-child(2) { width: 10vw; } // 두 번째 열의 너비
+  &:nth-child(3) { width: 6.6vw; background-color: #D8B4F8;; font-weight:700;} // 세 번째 열의 너비
+  &:nth-child(4) { width: 10vw } // 네 번째 열의 너비
+  &:nth-child(5) { width: 6.6vw; background-color: #D8B4F8;; font-weight:700;} // 다섯 번째 열의 너비
+  &:nth-child(6) { width: 10vw;  border-right: 0; } // 다섯 번째 열의 너비
+
+  input {
+    width: 100%; // 입력 필드 너비를 셀에 꽉 차도록 설정
+    padding: 1px; // 입력 필드 내부 패딩
+    box-sizing: border-box; // 박스 모델 지정
+  }
+}
+
+.table3 {
+  width: 90%;
+  border-collapse: collapse;
+  margin-top: 1.5vh;
+  background-color: #D8B4F8;; font-weight:700; 
+  border-top: 3px solid #49243E;
+  border-bottom: 3px solid #49243E;
+  table-layout : fixed ;
+  height:6vh;
+}
+.tbody3 {
+  width:100%;
+  height:6vh;
+}
+
+.table3 td, .table3 th {
+  border: 1px solid darkmagenta;
+ 
+  text-align: center;
+  &:nth-child(1) { border-left: 0; }
+  &:nth-child(4) { border-right: 0; }
+  // 첫 번째 열의 너비
+  input {
+    width: 100%; // 입력 필드 너비를 셀에 꽉 차도록 설정
+    padding: 1px; // 입력 필드 내부 패딩
+    box-sizing: border-box; // 박스 모델 지정
+  }
+}
+
+.table4 {
+  width: 80%;
+  border-collapse: collapse;
+  margin-top: 1.5vh;
+  background-color: #D8B4F8;; font-weight:700; 
+  border-top: 3px solid #49243E;
+  border-bottom: 3px solid #49243E;
+  height:4vh;
+}
+.tbody4 {
+  width:100%;
+  height:4vh;
+}
+
+.table4 td, .table4 th {
+  border: 1px solid darkmagenta;
+  
+  text-align: center;
+  &:nth-child(1) { border-left: 0; }
+  &:nth-child(3) { border-right: 0; }
+  input {
+    width: 100%; // 입력 필드 너비를 셀에 꽉 차도록 설정
+    padding: 1px; // 입력 필드 내부 패딩
+    box-sizing: border-box; // 박스 모델 지정
+  }
+}
+
+.table5 {
+  width: 90%;
+  border-collapse: collapse;
+  margin-top: 1.5vh;
+  background-color: #D8B4F8;; font-weight:700; 
+  border-top: 3px solid #49243E;
+  border-bottom: 3px solid #49243E;
+}
+
+.tbody5 {
+  width:100%;
+  height:6vh;
+}
+.table5 td, .table5 th {
+  border: 1px solid darkmagenta;
+ 
+  text-align: center;
+
+  &:nth-child(1) { width: 10vw; border-left: 0;} 
+  &:nth-child(2) { width: 10vw; } 
+  &:nth-child(3) { width: 80vw;  border-right: 0;} 
+  input {
+    width: 100%; // 입력 필드 너비를 셀에 꽉 차도록 설정
+    padding: 1px; // 입력 필드 내부 패딩
+    box-sizing: border-box; // 박스 모델 지정
+  }
+}
+
+.table6 {
+  width: 90%;
+  border-collapse: collapse;
+  margin-top: 1.5vh;
+  background-color: #D8B4F8;; font-weight:700; 
+  border-top: 3px solid #49243E;
+  border-bottom: 3px solid #49243E;
+}
+.tbody6 {
+  width:100%;
+  height:6vh;
+}
+
+.table6 td, .table6 th {
+
+  border: 1px solid #704264;
+
+  text-align: center;
+
+  &:nth-child(1) { width: 20vw; border-left: 0; } // 첫 번째 열의 너비
+  &:nth-child(2) { width: 80vw; border-right: 0; } 
+
+  input {
+    width: 100%; // 입력 필드 너비를 셀에 꽉 차도록 설정
+    padding: 1px; // 입력 필드 내부 패딩
+    box-sizing: border-box; // 박스 모델 지정
+  }
+}
+
+
+.table7 {
+  width: 90%;
+  border-collapse: collapse;
+  margin-top: 1.5vh;
+  background-color: #D8B4F8;; font-weight:700; 
+  border-top: 3px solid #49243E;
+  border-bottom: 3px solid #49243E;
+}
+.tbody7 {
+  width:100%;
+  height:20vh;
+}
+.table7 td, .table7 th {
+  border: 1px solid darkmagenta;
+  text-align: center;
+
+  &:nth-child(1) { width: 5vw; border-left: 0;} // 첫 번째 열의 너비
+  &:nth-child(2) { width: 15vw; } 
+  &:nth-child(3) { width: 50vw; border-right: 0;};
+
+  input {
+    width: 100%; // 입력 필드 너비를 셀에 꽉 차도록 설정
+    padding: 1px; // 입력 필드 내부 패딩
+    box-sizing: border-box; // 박스 모델 지정
+  }
+}
+
+}
+
+// 프린트
+
+
+@media print{
+  .main{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    table-layout : fixed ;
+    height:100vh;
+  }
+  .table {
+    width: 90%;
+    height:18vh;
+    border-collapse: collapse;
+    margin-top: 1.5vh;
+    background-color: #D8B4F8;;
+    font-weight:700;
+    border-top: 3px solid #49243E;
+    border-bottom: 3px solid #49243E;
+  }
+  
+  .tbody {
+    width:100%;
+    height:18vh;
+  }
+  
+  .table td, .table th {
+    border: 1px solid darkmagenta;
+  
+    text-align: center;
+  
+    &:nth-child(1) { width: 10%; border-left: 0;} // 첫 번째 열의 너비
+    &:nth-child(2) { width: 10%;} // 두 번째 열의 너비
+    &:nth-child(3) { width: 10%; } // 세 번째 열의 너비
+    &:nth-child(4) { width: 50%; } // 네 번째 열의 너비
+    &:nth-child(5) { width: 20%; border-right: 0; } // 다섯 번째 열의 너비
+  
+    input {
+      width: 100%; // 입력 필드 너비를 셀에 꽉 차도록 설정
+      height:100%;
+      padding: 2px; // 입력 필드 내부 패딩
+      box-sizing: border-box; // 박스 모델 지정
+    }
+  }
+  .white{
+    background-color: white;
+    font-weight:200;
+  }
+  
+  .table2 {
+    width: 90%;
+    border-collapse: collapse;
+    margin-top: 1.5vh;
+    border-top: 3px solid #49243E;
+    border-bottom: 3px solid #49243E;
+    height:9vh;
+    table-layout : fixed ;
+  }
+  .tbody2 {
+    width:100%;
+    height:9vh;
+  }
+  .table2 td, .table2 th {
+    border: 1px solid darkmagenta;
+    
+    text-align: center;
+    height:2vh;
+    &:nth-child(1) { width: 6.6vw; background-color: #D8B4F8;; font-weight:700; border-left: 0; } // 첫 번째 열의 너비
+    &:nth-child(2) { width: 10vw; } // 두 번째 열의 너비
+    &:nth-child(3) { width: 6.6vw; background-color: #D8B4F8;; font-weight:700;} // 세 번째 열의 너비
+    &:nth-child(4) { width: 10vw } // 네 번째 열의 너비
+    &:nth-child(5) { width: 6.6vw; background-color: #D8B4F8;; font-weight:700;} // 다섯 번째 열의 너비
+    &:nth-child(6) { width: 10vw;  border-right: 0; } // 다섯 번째 열의 너비
+  
+    input {
+      width: 100%; // 입력 필드 너비를 셀에 꽉 차도록 설정
+      padding: 1px; // 입력 필드 내부 패딩
+      box-sizing: border-box; // 박스 모델 지정
+    }
+  }
+  
+  .table3 {
+    width: 90%;
+    border-collapse: collapse;
+    margin-top: 1.5vh;
+    background-color: #D8B4F8;; font-weight:700; 
+    border-top: 3px solid #49243E;
+    border-bottom: 3px solid #49243E;
+    table-layout : fixed ;
+    height:6vh;
+  }
+  .tbody3 {
+    width:100%;
+    height:6vh;
+  }
+  
+  .table3 td, .table3 th {
+    border: 1px solid darkmagenta;
+   
+    text-align: center;
+    &:nth-child(1) { border-left: 0; }
+    &:nth-child(4) { border-right: 0; }
+    // 첫 번째 열의 너비
+    input {
+      width: 100%; // 입력 필드 너비를 셀에 꽉 차도록 설정
+      padding: 1px; // 입력 필드 내부 패딩
+      box-sizing: border-box; // 박스 모델 지정
+    }
+  }
+  
+  .table4 {
+    width: 80%;
+    border-collapse: collapse;
+    margin-top: 1.5vh;
+    background-color: #D8B4F8;; font-weight:700; 
+    border-top: 3px solid #49243E;
+    border-bottom: 3px solid #49243E;
+    height:4vh;
+  }
+  .tbody4 {
+    width:100%;
+    height:4vh;
+  }
+  
+  .table4 td, .table4 th {
+    border: 1px solid darkmagenta;
+    
+    text-align: center;
+    &:nth-child(1) { border-left: 0; }
+    &:nth-child(3) { border-right: 0; }
+    input {
+      width: 100%; // 입력 필드 너비를 셀에 꽉 차도록 설정
+      padding: 1px; // 입력 필드 내부 패딩
+      box-sizing: border-box; // 박스 모델 지정
+    }
+  }
+  
+  .table5 {
+    width: 90%;
+    border-collapse: collapse;
+    margin-top: 1.5vh;
+    background-color: #D8B4F8;; font-weight:700; 
+    border-top: 3px solid #49243E;
+    border-bottom: 3px solid #49243E;
+  }
+  
+  .tbody5 {
+    width:100%;
+    height:6vh;
+  }
+  .table5 td, .table5 th {
+    border: 1px solid darkmagenta;
+   
+    text-align: center;
+  
+    &:nth-child(1) { width: 10vw; border-left: 0;} 
+    &:nth-child(2) { width: 10vw; } 
+    &:nth-child(3) { width: 80vw;  border-right: 0;} 
+    input {
+      width: 100%; // 입력 필드 너비를 셀에 꽉 차도록 설정
+      padding: 1px; // 입력 필드 내부 패딩
+      box-sizing: border-box; // 박스 모델 지정
+    }
+  }
+  
+  .table6 {
+    width: 90%;
+    border-collapse: collapse;
+    margin-top: 1.5vh;
+    background-color: #D8B4F8;; font-weight:700; 
+    border-top: 3px solid #49243E;
+    border-bottom: 3px solid #49243E;
+  }
+  .tbody6 {
+    width:100%;
+    height:6vh;
+  }
+  
+  .table6 td, .table6 th {
+  
+    border: 1px solid #704264;
+  
+    text-align: center;
+  
+    &:nth-child(1) { width: 20vw; border-left: 0; } // 첫 번째 열의 너비
+    &:nth-child(2) { width: 80vw; border-right: 0; } 
+  
+    input {
+      width: 100%; // 입력 필드 너비를 셀에 꽉 차도록 설정
+      padding: 1px; // 입력 필드 내부 패딩
+      box-sizing: border-box; // 박스 모델 지정
+    }
+  }
+  
+  
+  .table7 {
+    width: 90%;
+    border-collapse: collapse;
+    margin-top: 1.5vh;
+    background-color: #D8B4F8;; font-weight:700; 
+    border-top: 3px solid #49243E;
+    border-bottom: 3px solid #49243E;
+  }
+  .tbody7 {
+    width:100%;
+    height:20vh;
+  }
+  .table7 td, .table7 th {
+    border: 1px solid darkmagenta;
+    text-align: center;
+  
+    &:nth-child(1) { width: 5vw; border-left: 0;} // 첫 번째 열의 너비
+    &:nth-child(2) { width: 15vw; } 
+    &:nth-child(3) { width: 50vw; border-right: 0;};
+  
+    input {
+      width: 100%; // 입력 필드 너비를 셀에 꽉 차도록 설정
+      padding: 1px; // 입력 필드 내부 패딩
+      box-sizing: border-box; // 박스 모델 지정
+    }
+  }
+  
+}
+
+

@@ -1,6 +1,6 @@
 .container {
   padding: 20px;
-  font-size:1vw;
+  font-size:18px;
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -28,16 +28,18 @@
   width: 90%;
   border-collapse: collapse;
   border: 1px solid black; /* 더 진한 테두리를 위해 */
-  font-size:0.8vw;
+  font-size:16px;
   margin-top: 2vh;
   .input{
-    width:20%;  
-    border:1px solid black;
+    width:30%;  
+    height:3vh;
+    border:1px solid #ccc;
     margin-left:1vw;
   }
   .input2{
     width:40%;
-    border:1px solid black;
+    height:3vh;
+    border:1px solid #ccc;
     margin-left: 1vw;
   }
 }
@@ -122,4 +124,38 @@
   width: 25vw; /* 2열의 너비를 10vw로 설정 */
   text-align: center;
 
+}
+
+
+@media print {
+  /* 프린트할 때 숨기고 싶은 요소들의 클래스 또는 태그를 지정 */
+  .container {
+    padding: 20px;
+    font-size:9px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+
+  .table{
+    width: 80vw;
+    height: 20vh;
+    border-collapse: collapse;
+    margin-top: 2vh;
+
+    .input{
+      border:none;
+    }
+
+    .select {
+      appearance: none;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      border: none;
+      background: transparent;
+      /* 화살표를 숨기기 위한 색 설정, 페이지 배경색과 동일하게 설정 필요 */
+      color: black; /* 텍스트 색상을 지정해주는 것이 좋습니다 */
+      pointer-events: none;
+    }
+  }
 }

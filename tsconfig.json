@@ -21,6 +21,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "tailwind.config.js", "middleware.ts", "app/api/dashbored/member/route.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "tailwind.config.js", "middleware.ts", "app/api/dashbored/member/route.ts", "app/api/registerUser/route.js", "app/api/dashbored/corporation/[id]/route.ts"],
   "exclude": ["node_modules"]
 }

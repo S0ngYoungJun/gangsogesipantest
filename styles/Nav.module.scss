@@ -6,6 +6,7 @@
  margin-top:5vh;
 }
 
+
 .collapsed {
   padding: 8px 0;
 }
@@ -46,6 +47,7 @@
 
 .defaultTextButton {
   background-color: white;
+  width:100%;
   color: black;
   &:hover {
     background-color: #bbb;
@@ -82,3 +84,21 @@
 
   
 }
+
+
+.dropdownMenu {
+  visibility: hidden; /* 초기 상태에서는 보이지 않음 */
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: visibility 0s, opacity 0.3s ease-in-out, max-height 0.3s ease-in-out;
+}
+
+.dropdownContainer:hover .dropdownMenu,
+.dropdownContainer:focus-within .dropdownMenu {
+  visibility: visible; /* 활성 상태에서 보이게 함 */
+  opacity: 1;
+  max-height: 500px; /* 충분히 큰 값으로 설정하여 모든 메뉴 아이템이 표시될 수 있도록 함 */
+}
+
+

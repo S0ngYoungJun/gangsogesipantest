@@ -7,7 +7,7 @@ import styles from './cal.module.css';
 import { useReactToPrint } from 'react-to-print';
 import { jsPDF } from "jspdf";
 import html2canvas from 'html2canvas';
-
+import Table from '@/components/cal/table';
 
 export default function TablePage() {
   const dropdownOptions = ["ISO 9001:2015", "ISO 14001:2015", "ISO 45001:2018", "ISO 9001:2015 & 14001:2015", "ISO 9001:2015 & 45001:2018", "ISO 14001:2015 & 45001:2018", "ISO 9001:2015 & 14001:2015 & 45001:2018"];
@@ -30,6 +30,11 @@ const [thridTableData, setThirdTableData] = useState([
   ['할인', '한국ISO지원센터 특별 할인', '', '', ''],
   ['총합계금액', '', '', '', '']
 ]);
+const TablelData4 = [
+  ["지역", "대전/충청", "서울/경기/인천", "경상/전라/부산/강원", "제주"], 
+  ["교통비", "50000", "70000", "100000", "150000"], 
+  ["숙박비", "60000 1인/1박", "분할 항목 2-2", "합친 항목 4-5", ""]
+];
   const [selectedType, setSelectedType] = useState(newDropdownOptions[1]);
     // 1열의 내용을 미리 설정
     const rowData = [
@@ -47,8 +52,7 @@ const [thridTableData, setThirdTableData] = useState([
       "경상/전라/부산/강원": 200000,
       "제주": 300000
     });
-    
-    const pdfRef = useRef(null);
+   
  //<HTMLDivElement>
       const [additionalFactors, setAdditionalFactors] = useState({
         row3: 0, // 초기값 설정
@@ -87,6 +91,8 @@ const [thridTableData, setThirdTableData] = useState([
   };
 
   const [discount, setDiscount] = useState(0);
+  
+const [secondTableData, setSecondTableData] = useState(initialData);
 
   const handleDiscountChange = (e) => {
     const value = e.target.value;
@@ -97,7 +103,6 @@ const [thridTableData, setThirdTableData] = useState([
     setDiscount(parseInt(value, 10) || "");
   };
 
-const [secondTableData, setSecondTableData] = useState(initialData);
 
 const calculatePrice = (standard, type) => {
   // "사후 1차"와 "사후 2차"는 같은 가격 적용
@@ -429,7 +434,7 @@ useEffect(() => {
     newData[8][1] = sum.toLocaleString(); // 총합을 문자열로 변환하여 저장
     return newData;
   });
-}, [secondTableData]); // secondTableData에 의존하여 변화 감지
+}, [seniorAuditorsRow3, seniorAuditorsRow6, auditorsRow4, auditorsRow7,additionalFactors]); // secondTableData에 의존하여 변화 감지
 
 useEffect(() => {
   setSecondTableData(prevData => {
@@ -449,14 +454,14 @@ useEffect(() => {
     newData[8][3] = totalSum.toLocaleString();
     return newData;
   });
-}, [secondTableData]); // secondTableData 변경 시 업데이트
+}, [seniorAuditorsRow3, seniorAuditorsRow6, auditorsRow4, auditorsRow7]); // secondTableData 변경 시 업데이트
 
 
 const downloadPdfDocument = () => {
   const input = document.getElementById('content-to-print'); // 특정 요소 선택
   if (!input) return;
   html2canvas(input, { scale: 2 }).then((canvas) => {
-      const imgData = canvas.toDataURL('image/png');
+      const imgData = canvas.toDataURL('image/jpg');
       const pdf = new jsPDF({
           orientation: "portrait",
           unit: "mm",
@@ -469,11 +474,11 @@ const downloadPdfDocument = () => {
       const ratio = widthRatio > heightRatio ? heightRatio : widthRatio;
 
       const canvasWidth = canvas.width * ratio;
-      const canvasHeight = canvas.height * ratio * 2;
+      const canvasHeight = canvas.height * ratio * 1.5;
       const marginX = (pageWidth - canvasWidth) / 2;
       const marginY = (pageHeight - canvasHeight) / 2;
 
-      pdf.addImage(imgData, 'PNG', marginX, marginY, canvasWidth, canvasHeight);
+      pdf.addImage(imgData, 'JPG', marginX, marginY, canvasWidth, canvasHeight);
       pdf.save("download.pdf");
   });
 }
@@ -548,6 +553,13 @@ useEffect(() => {
   });
 }, [thridTableData[0][1], thridTableData[0][2], thridTableData[0][3]]); // 2, 3, 4열의 값에 의존
 
+const pdfRef = useRef(null);  // 프린트할 컴포넌트를 참조할 ref
+
+  // React to Print 설정
+  const handlePrint = useReactToPrint({
+    content: () => pdfRef.current,
+  });
+
   return (
         <div className={styles.container} ref={pdfRef} id="content-to-print" >
             <Head>
@@ -605,7 +617,7 @@ useEffect(() => {
                                     <select
                                         value={selectedRegion}
                                         onChange={handleRegionChange}
-                                        className={styles.input}
+                                        className={styles.select}
                                     >
                                         {thirdRowOptions.map((option, optionIndex) => (
                                             <option key={optionIndex} value={option}>
@@ -829,7 +841,12 @@ useEffect(() => {
         ))}
       </tbody>
       </table>
+        <div>
+        <h1>출장비 기준</h1>
+        <Table data={TablelData4} />
+      </div>
         <button onClick={downloadPdfDocument}>Download PDF</button>
+        <button onClick={handlePrint}>Print this out!</button>
         </div>
     );
 }

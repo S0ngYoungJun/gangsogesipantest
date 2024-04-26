@@ -13,6 +13,7 @@ import {
   Settings,
   ChevronRight,
   ChevronDown,
+  Building,
   UserRoundCheck,
 } from "lucide-react";
 import { Button } from "./ui/button";
@@ -66,29 +67,42 @@ export default function SideNavbar({}: Props) {
             title: "담당자 관리",
             href: "/dashbored/users",
             icon: UsersRound,
-            variant: "default"
+            variant: "default",
+            dropdown: { // 드롭다운 메뉴 추가
+              items: [
+                { icon: UsersRound,title: "팀 설정", href: "/dashbored/users" },
+                { icon: UsersRound,title: "권한 설정", href: "/dashbored/users/permissions" }
+              ]
+            }
           },
-          // {
-          //   title: "Ordrs",
-          //   href: "/orders",
-          //   icon: ShoppingCart,
-          //   variant: "ghost"
-          // },
-          // {
-          //   title: "Settings",
-          //   href: "/settings",
-          //   icon: Settings,
-          //   variant: "ghost"
-          // }
           {
             title: "견적 계산기",
             href: "/dashbored/cal",
             icon: Settings,
             variant: "default"
-          }
+          },
+          {
+            title: "회원사등록",
+            href: "/dashbored/test",
+            icon: Building,
+            variant: "default"
+          },
+          {
+            title: "회원사관리",
+            href: "/dashbored/corporation",
+            icon: Building,
+            variant: "default"
+          },
+          {
+            title: "엑셀테스트",
+            href: "/dashbored/test2",
+            icon: Building,
+            variant: "default"
+          },
+         
         ]}
       />
-      <div>
+      {/* <div>
         <Button onClick={toggleDropdown} variant="ghost">
           관리자 옵션 {dropdownOpen ? '▼' : '▶'}
         </Button>
@@ -98,7 +112,7 @@ export default function SideNavbar({}: Props) {
             <li><a href="/dashbored/advanced">고급 설정</a></li>
           </ul>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
